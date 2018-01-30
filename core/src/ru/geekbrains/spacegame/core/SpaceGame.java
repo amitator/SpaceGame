@@ -1,4 +1,4 @@
-package ru.geekbrains.spacegame;
+package ru.geekbrains.spacegame.core;
 
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;

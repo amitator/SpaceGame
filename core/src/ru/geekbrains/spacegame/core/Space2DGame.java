@@ -1,4 +1,4 @@
-package ru.geekbrains.spacegame;
+package ru.geekbrains.spacegame.core;
 
 import com.badlogic.gdx.Game;
 
@@ -9,7 +9,7 @@ import com.badlogic.gdx.Game;
 public class Space2DGame extends Game {
     @Override
     public void create(){
-        setScreen(new MenuScreen());
+        setScreen(new MenuScreen(this));
     }
 
 }

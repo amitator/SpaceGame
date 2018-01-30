@@ -3,8 +3,7 @@ package ru.geekbrains.spacegame.desktop;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
 
-import ru.geekbrains.spacegame.Space2DGame;
-import ru.geekbrains.spacegame.SpaceGame;
+import ru.geekbrains.spacegame.core.Space2DGame;
 
 public class DesktopLauncher {
 	public static void main (String[] arg) {
