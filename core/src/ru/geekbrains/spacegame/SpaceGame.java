@@ -35,5 +35,6 @@ public class SpaceGame extends ApplicationAdapter {
 		batch.dispose();
 		img.dispose();
 		backgroundImage.dispose();
+		playerShip.dispose();
 	}
 }
