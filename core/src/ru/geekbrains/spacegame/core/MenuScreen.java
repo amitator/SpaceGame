@@ -28,7 +28,7 @@ public class MenuScreen extends Base2DScreen {
         batch = new SpriteBatch();
         background = new Texture("stars.jpg");
         playerShip = new Texture("gamer_ship.png");
-        player = new Player(playerShip, new Vector2(600, 50), 10);
+        player = new Player(playerShip, new Vector2(600, 50), 150);
     }
 
     @Override
@@ -44,6 +44,7 @@ public class MenuScreen extends Base2DScreen {
     public void dispose() {
         batch.dispose();
         background.dispose();
+        playerShip.dispose();
         super.dispose();
     }
 

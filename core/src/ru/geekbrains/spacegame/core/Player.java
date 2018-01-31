@@ -1,5 +1,6 @@
 package ru.geekbrains.spacegame.core;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
@@ -22,7 +23,7 @@ public class Player {
     public Player(Texture playerShip, Vector2 position, float speed) {
         this.playerShip = playerShip;
         this.position = position;
-        targetPosition = position;
+        this.targetPosition = new Vector2(position);
         this.speed = speed;
     }
 
@@ -31,18 +32,19 @@ public class Player {
     }
 
     public void render(SpriteBatch batch){
-        update(.5f);
+        update(Gdx.graphics.getDeltaTime());
         batch.draw(playerShip, position.x, position.y);
     }
 
     public void update(float delta){
         Vector2 distance = new Vector2(targetPosition); //Creating new Vector from target points
         distance.sub(position); //subscribe ship vector(position) from target vector
-        if(distance.len() > .1f){
+        System.out.println(distance.len());
+//        if(distance.len() > .1f){
             Vector2 speedVector = distance.cpy().nor().scl(delta * speed); //normalization to get unit vector
 
             position.add(speedVector);
-        }
+//        }
     }
 
 }
