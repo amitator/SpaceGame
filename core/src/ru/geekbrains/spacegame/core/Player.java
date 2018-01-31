@@ -39,12 +39,12 @@ public class Player {
     public void update(float delta){
         Vector2 distance = new Vector2(targetPosition); //Creating new Vector from target points
         distance.sub(position); //subscribe ship vector(position) from target vector
-        System.out.println(distance.len());
-//        if(distance.len() > .1f){
+//        System.out.println(distance.len());
+        if(distance.len() > 3.f){
             Vector2 speedVector = distance.cpy().nor().scl(delta * speed); //normalization to get unit vector
 
             position.add(speedVector);
-//        }
+        }
     }
 
 }

@@ -28,7 +28,7 @@ public class MenuScreen extends Base2DScreen {
         batch = new SpriteBatch();
         background = new Texture("stars.jpg");
         playerShip = new Texture("gamer_ship.png");
-        player = new Player(playerShip, new Vector2(600, 50), 150);
+        player = new Player(playerShip, new Vector2(600, 50), 300);
     }
 
     @Override
@@ -50,7 +50,7 @@ public class MenuScreen extends Base2DScreen {
 
     @Override
     public boolean touchDown(int screenX, int screenY, int pointer, int button) {
-        player.setTargetPosition(screenX, Gdx.graphics.getHeight() - screenY);
+        player.setTargetPosition((float) screenX, (float)(Gdx.graphics.getHeight() - screenY));
         return true;
     }
 }
