@@ -5,13 +5,24 @@ import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.math.Matrix4;
 
 public class Base2DScreen implements Screen, InputProcessor{
 
     protected Game game;
 
+    private Rect screenBounds; //bounds of draw area in px
+    private Rect worldBounds; //bounds of world coordinates
+    private Rect glBounds; //default bounds of world - GL
+
+    protected Matrix4 worldToGl;
+
     public Base2DScreen(Game game) {
         this.game = game;
+        this.screenBounds = new Rect();
+        this.worldBounds = new Rect();
+        this.glBounds = new Rect(0, 0, 1f, 1f);
+        this.worldToGl = new Matrix4();
     }
 
     @Override
@@ -26,7 +37,13 @@ public class Base2DScreen implements Screen, InputProcessor{
 
     @Override
     public void resize(int width, int height) {
+        screenBounds.setSize(width, height);
+        screenBounds.setLeft(0);
+        screenBounds.setBottom(0);
 
+        float aspect = width / (float) height;
+        worldBounds.setHeight(1f);
+        worldBounds.setWidth(1f * aspect);
     }
 
     @Override
