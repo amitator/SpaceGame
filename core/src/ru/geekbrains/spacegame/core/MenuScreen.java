@@ -50,7 +50,7 @@ public class MenuScreen extends Base2DScreen {
 
     @Override
     public boolean touchDown(int screenX, int screenY, int pointer, int button) {
-        player.setTargetPosition((float) screenX, (float)(Gdx.graphics.getHeight() - screenY));
+        player.setTargetPosition(screenX, Gdx.graphics.getHeight() - screenY);
         return true;
     }
 }

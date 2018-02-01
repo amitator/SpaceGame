@@ -31,8 +31,9 @@ public class Player {
         targetPosition.set(x - SHIP_WIDTH / 2, y - SHIP_HEIGHT / 2);
     }
 
+    //runs 60 times per sec
     public void render(SpriteBatch batch){
-        update(Gdx.graphics.getDeltaTime());
+        update(Gdx.graphics.getDeltaTime()); //in case it's not 60 tps
         batch.draw(playerShip, position.x, position.y);
     }
 
