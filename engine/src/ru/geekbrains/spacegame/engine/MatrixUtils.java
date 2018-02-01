@@ -34,5 +34,10 @@ public class MatrixUtils {
         float scaleX = dst.getWidth() / src.getWidth();
         float scaleY = dst.getHeight() / src.getHeight();
         mat.idt().translate(dst.pos.x, dst.pos.y).scale(scaleX, scaleY).translate(-src.pos.x, -src.pos.y);
+        /*
+        * translate(-src.pos.x, -src.pos.y) - moving to the begining of coordinates where it translates X and Y
+        * scale(scaleX, scaleY) - scale it more or less depend on what bigger SRC or DST
+        *
+        * */
     }
 }

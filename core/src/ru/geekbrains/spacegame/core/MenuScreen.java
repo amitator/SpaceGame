@@ -13,7 +13,6 @@ import ru.geekbrains.spacegame.engine.Base2DScreen;
  */
 
 public class MenuScreen extends Base2DScreen {
-    private SpriteBatch batch;
     private Texture background;
     private Texture playerShip;
     private Player player;
@@ -25,7 +24,6 @@ public class MenuScreen extends Base2DScreen {
     @Override
     public void show() {
         super.show();
-        batch = new SpriteBatch();
         batch.getProjectionMatrix().idt(); //getting current Matrix for our batch and make it unit matrix
         background = new Texture("stars.jpg");
         playerShip = new Texture("gamer_ship.png");

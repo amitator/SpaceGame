@@ -5,6 +5,7 @@ import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Matrix4;
 
 public class Base2DScreen implements Screen, InputProcessor{
@@ -16,18 +17,24 @@ public class Base2DScreen implements Screen, InputProcessor{
     private Rect glBounds; //default bounds of world - GL
 
     protected Matrix4 worldToGl;
+    protected SpriteBatch batch;
 
     public Base2DScreen(Game game) {
         this.game = game;
-        this.screenBounds = new Rect();
-        this.worldBounds = new Rect();
-        this.glBounds = new Rect(0, 0, 1f, 1f);
-        this.worldToGl = new Matrix4();
+
     }
 
     @Override
     public void show() {
         Gdx.input.setInputProcessor(this);
+        this.screenBounds = new Rect();
+        this.worldBounds = new Rect();
+        this.glBounds = new Rect(0, 0, 1f, 1f);
+        this.worldToGl = new Matrix4();
+        if (batch !=  null){
+            throw new RuntimeException("batch != null, repeats to set up screen without dispose");
+        }
+        batch = new SpriteBatch();
     }
 
     @Override
@@ -37,13 +44,15 @@ public class Base2DScreen implements Screen, InputProcessor{
 
     @Override
     public void resize(int width, int height) {
-        screenBounds.setSize(width, height);
-        screenBounds.setLeft(0);
-        screenBounds.setBottom(0);
+        screenBounds.setSize(width, height);//SCREEN
+        screenBounds.setLeft(0);            //SCREEN
+        screenBounds.setBottom(0);          //SCREEN
 
-        float aspect = width / (float) height;
-        worldBounds.setHeight(1f);
-        worldBounds.setWidth(1f * aspect);
+        float aspect = width / (float) height;//SCREEN TO WORLD
+        worldBounds.setHeight(1f);            //SCREEN TO WORLD
+        worldBounds.setWidth(1f * aspect);    //SCREEN TO WORLD
+        MatrixUtils.calcTransitionMatrix(worldToGl, worldBounds, glBounds);//WORLD TO GL
+        batch.setProjectionMatrix(worldToGl);                              //WORLD TO GL
     }
 
     @Override
@@ -63,7 +72,7 @@ public class Base2DScreen implements Screen, InputProcessor{
 
     @Override
     public void dispose() {
-
+        batch.dispose();
     }
 
     @Override
