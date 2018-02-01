@@ -1,18 +1,18 @@
-package ru.geekbrains.stargame.engine.math;
+package ru.geekbrains.spacegame.engine;
 
 import java.util.Random;
 
 /**
- * Генератор случайных чисел
+ * Random number
  */
 public class Rnd {
     private static final Random random = new Random();
 
     /**
-     * Сгенерировать случайное число
-     * @param min минимальное значение случайного числа
-     * @param max максимальное значение случайного числа
-     * @return результат
+     * To get rnd number
+     * @param min minimum number
+     * @param max max nunmber
+     * @return result
      */
     public static float nextFloat(float min, float max) {
         return random.nextFloat() * (max - min) + min;

@@ -26,6 +26,7 @@ public class MenuScreen extends Base2DScreen {
     public void show() {
         super.show();
         batch = new SpriteBatch();
+        batch.getProjectionMatrix().idt(); //getting current Matrix for our batch and make it unit matrix
         background = new Texture("stars.jpg");
         playerShip = new Texture("gamer_ship.png");
         player = new Player(playerShip, new Vector2(600, 50), 300);

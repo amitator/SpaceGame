@@ -1,11 +1,11 @@
-package ru.geekbrains.engine.math;
+package ru.geekbrains.spacegame.engine;
 
 
 import com.badlogic.gdx.math.Matrix3;
 import com.badlogic.gdx.math.Matrix4;
 
 /**
- * Утилита для работы с матрицами
+ * Matrix calculation utility
  */
 public class MatrixUtils {
 
@@ -13,10 +13,10 @@ public class MatrixUtils {
     }
 
     /**
-     * Расчёт матрицы перехода 4x4
-     * @param mat итоговая матрица преобразований
-     * @param src исходный квадрат
-     * @param dst итоговый квадрат
+     * Calculation of matrix 4x4
+     * @param mat end matrix
+     * @param src initial square
+     * @param dst destination square
      */
     public static void calcTransitionMatrix(Matrix4 mat, Rect src, Rect dst) {
         float scaleX = dst.getWidth() / src.getWidth();
@@ -25,10 +25,10 @@ public class MatrixUtils {
     }
 
     /**
-     * Расчёт матрицы перехода 3x3
-     * @param mat итоговая матрица преобразований
-     * @param src исходный квадрат
-     * @param dst итоговый квадрат
+     * Calculation of matrix 3x3
+     * @param mat end matrix
+     * @param src initial square
+     * @param dst destination square
      */
     public static void calcTransitionMatrix(Matrix3 mat, Rect src, Rect dst) {
         float scaleX = dst.getWidth() / src.getWidth();

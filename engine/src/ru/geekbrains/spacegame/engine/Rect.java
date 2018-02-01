@@ -1,15 +1,15 @@
-package ru.geekbrains.stargame.engine.math;
+package ru.geekbrains.spacegame.engine;
 
 import com.badlogic.gdx.math.Vector2;
 
 /**
- * Прямоугольник
+ * Rectangle with advanced options
  */
 public class Rect {
 
-    public final Vector2 pos = new Vector2(); // позиция по центру
-    protected float halfWidth; // половина ширины
-    protected float halfHeight; // половина высоты
+    public final Vector2 pos = new Vector2(); // center position
+    protected float halfWidth; // half Width
+    protected float halfHeight; // half Height
 
     public Rect() {
 
