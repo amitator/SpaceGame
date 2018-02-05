@@ -9,14 +9,14 @@ import ru.geekbrains.spacegame.engine.Sprite;
  * Created by Igor Prus on 06-Feb-18.
  */
 
-public class Background extends Sprite {
-    public Background(TextureRegion region) {
+public class ExitButton extends Sprite{
+    public ExitButton(TextureRegion region) {
         super(region);
     }
 
     @Override
     public void resize(Rect worldBounds) {
-        setWithProportions(worldBounds.getWidth()); //background width = worldbounds width
-        pos.set(worldBounds.pos);           //Set background position to centre
+        setWithProportions(.15f); //background width = worldbounds width
+        pos.set(.7f, -.4f);           //Set background position to centre
     }
 }

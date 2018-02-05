@@ -17,7 +17,11 @@ import ru.geekbrains.spacegame.engine.Sprite;
 
 public class MenuScreen extends Base2DScreen {
     private Texture backgroundTexture;
+    private Texture start;
+    private Texture exit;
     private Background background;
+    private StartButton startButton;
+    private ExitButton exitButton;
 
     public MenuScreen(Game game) {
         super(game);
@@ -29,6 +33,10 @@ public class MenuScreen extends Base2DScreen {
         batch.getProjectionMatrix().idt(); //getting current Matrix for our batch and make it unit matrix
         backgroundTexture = new Texture("stars.jpg");
         background = new Background(new TextureRegion(backgroundTexture));
+        start = new Texture("play.png");
+        exit = new Texture("exit.png");
+        startButton = new StartButton(new TextureRegion(start));
+        exitButton = new ExitButton(new TextureRegion(exit));
     }
 
     @Override
@@ -36,6 +44,8 @@ public class MenuScreen extends Base2DScreen {
         super.render(delta);
         batch.begin();
         background.draw(batch);
+        startButton.draw(batch);
+        exitButton.draw(batch);
         batch.end();
     }
 
@@ -43,6 +53,8 @@ public class MenuScreen extends Base2DScreen {
     public void resize(Rect worldBounds) {
         super.resize(worldBounds);
         background.resize(worldBounds);
+        startButton.resize(worldBounds);
+        exitButton.resize(worldBounds);
     }
 
     @Override
@@ -54,6 +66,8 @@ public class MenuScreen extends Base2DScreen {
     public void dispose() {
         backgroundTexture.dispose();
         batch.dispose();
+        start.dispose();
+        exit.dispose();
         super.dispose();
     }
 
