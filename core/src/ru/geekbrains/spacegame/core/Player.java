@@ -35,7 +35,7 @@ public class Player {
     public void render(SpriteBatch batch){
         update(Gdx.graphics.getDeltaTime()); //in case it's not 60 tps
 //        batch.draw(playerShip, position.x, position.y);
-        batch.draw(playerShip, -.0f, -.4f, .15f, .15f);
+        batch.draw(playerShip, 0f, -.4f, .15f, .15f);
     }
 
     public void update(float delta){

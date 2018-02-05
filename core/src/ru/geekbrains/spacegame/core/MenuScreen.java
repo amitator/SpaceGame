@@ -7,6 +7,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 
 import ru.geekbrains.spacegame.engine.Base2DScreen;
+import ru.geekbrains.spacegame.engine.Rect;
 
 /**
  * Created by Igor Prus on 31-Jan-18.
@@ -26,7 +27,7 @@ public class MenuScreen extends Base2DScreen {
         super.show();
         batch.getProjectionMatrix().idt(); //getting current Matrix for our batch and make it unit matrix
         background = new Texture("stars.jpg");
-        playerShip = new Texture("gamer_ship.png");
+        playerShip = new Texture( "gamer_ship.png");
         player = new Player(playerShip, new Vector2(600, 50), 300);
     }
 
@@ -40,6 +41,16 @@ public class MenuScreen extends Base2DScreen {
     }
 
     @Override
+    public void resize(Rect worldBounds) {
+        super.resize(worldBounds);
+    }
+
+    @Override
+    protected void touchUp(Vector2 touch, int pointer) {
+        super.touchUp(touch, pointer);
+    }
+
+    @Override
     public void dispose() {
         batch.dispose();
         background.dispose();
@@ -47,9 +58,4 @@ public class MenuScreen extends Base2DScreen {
         super.dispose();
     }
 
-    @Override
-    public boolean touchDown(int screenX, int screenY, int pointer, int button) {
-        player.setTargetPosition(screenX, Gdx.graphics.getHeight() - screenY);
-        return true;
-    }
 }

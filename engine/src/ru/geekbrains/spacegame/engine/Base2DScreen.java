@@ -9,6 +9,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Matrix3;
 import com.badlogic.gdx.math.Matrix4;
 import com.badlogic.gdx.math.Vector2;
+import com.sun.org.apache.xpath.internal.SourceTree;
 
 public class Base2DScreen implements Screen, InputProcessor{
 
@@ -61,6 +62,11 @@ public class Base2DScreen implements Screen, InputProcessor{
         MatrixUtils.calcTransitionMatrix(worldToGl, worldBounds, glBounds);//WORLD TO GL
         batch.setProjectionMatrix(worldToGl);                              //WORLD TO GL
         MatrixUtils.calcTransitionMatrix(screenToWorld, screenBounds, worldBounds);
+        resize(worldBounds);
+    }
+
+    public void resize(Rect worldBounds){
+
     }
 
     @Override
@@ -100,19 +106,38 @@ public class Base2DScreen implements Screen, InputProcessor{
 
     @Override
     public boolean touchDown(int screenX, int screenY, int pointer, int button) {
-        System.out.println("screenX = " + screenX + "   screenY = " + (Gdx.graphics.getHeight() - screenY));
         touch.set(screenX, screenBounds.getHeight() - screenY).mul(screenToWorld);
+        System.out.println("touchDown x = " +touch.x + "\t" + "y = " + touch.y);
+        touchDown(touch, pointer);
         return false;
+    }
+
+    protected void touchDown(Vector2 touch, int pointer){
+
     }
 
     @Override
     public boolean touchUp(int screenX, int screenY, int pointer, int button) {
+        touch.set(screenX, screenBounds.getHeight() - screenY).mul(screenToWorld);
+        System.out.println("touchUp x = " +touch.x + "\t" + "y = " + touch.y);
+        touchUp(touch, pointer);
         return false;
+    }
+
+    protected void touchUp(Vector2 touch, int pointer){
+
     }
 
     @Override
     public boolean touchDragged(int screenX, int screenY, int pointer) {
+        touch.set(screenX, screenBounds.getHeight() - screenY).mul(screenToWorld);
+        System.out.println("touchDragged x = " +touch.x + "\t" + "y = " + touch.y);
+        touchDragged(touch, pointer);
         return false;
+    }
+
+    protected void touchDragged(Vector2 touch, int pointer){
+
     }
 
     @Override
