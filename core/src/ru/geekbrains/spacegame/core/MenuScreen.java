@@ -34,7 +34,7 @@ public class MenuScreen extends Base2DScreen {
     public void render(float delta) {
         super.render(delta);
         batch.begin();
-        batch.draw(background, 0, 0);
+//        batch.draw(background, 0, 0);
         player.render(batch);
         batch.end();
     }

@@ -6,7 +6,9 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.math.Matrix3;
 import com.badlogic.gdx.math.Matrix4;
+import com.badlogic.gdx.math.Vector2;
 
 public class Base2DScreen implements Screen, InputProcessor{
 
@@ -17,7 +19,11 @@ public class Base2DScreen implements Screen, InputProcessor{
     private Rect glBounds; //default bounds of world - GL
 
     protected Matrix4 worldToGl;
+    protected Matrix3 screenToWorld;
+
     protected SpriteBatch batch;
+
+    private final Vector2 touch = new Vector2();
 
     public Base2DScreen(Game game) {
         this.game = game;
@@ -31,6 +37,7 @@ public class Base2DScreen implements Screen, InputProcessor{
         this.worldBounds = new Rect();
         this.glBounds = new Rect(0, 0, 1f, 1f);
         this.worldToGl = new Matrix4();
+        this.screenToWorld = new Matrix3();
         if (batch !=  null){
             throw new RuntimeException("batch != null, repeats to set up screen without dispose");
         }
@@ -48,11 +55,12 @@ public class Base2DScreen implements Screen, InputProcessor{
         screenBounds.setLeft(0);            //SCREEN
         screenBounds.setBottom(0);          //SCREEN
 
-        float aspect = width / (float) height;//SCREEN TO WORLD
+        float scale = width / (float) height;//SCREEN TO WORLD
         worldBounds.setHeight(1f);            //SCREEN TO WORLD
-        worldBounds.setWidth(1f * aspect);    //SCREEN TO WORLD
+        worldBounds.setWidth(1f * scale);    //SCREEN TO WORLD
         MatrixUtils.calcTransitionMatrix(worldToGl, worldBounds, glBounds);//WORLD TO GL
         batch.setProjectionMatrix(worldToGl);                              //WORLD TO GL
+        MatrixUtils.calcTransitionMatrix(screenToWorld, screenBounds, worldBounds);
     }
 
     @Override
@@ -93,6 +101,7 @@ public class Base2DScreen implements Screen, InputProcessor{
     @Override
     public boolean touchDown(int screenX, int screenY, int pointer, int button) {
         System.out.println("screenX = " + screenX + "   screenY = " + (Gdx.graphics.getHeight() - screenY));
+        touch.set(screenX, screenBounds.getHeight() - screenY).mul(screenToWorld);
         return false;
     }
 
