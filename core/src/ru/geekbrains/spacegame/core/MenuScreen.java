@@ -16,10 +16,8 @@ import ru.geekbrains.spacegame.engine.Sprite;
  */
 
 public class MenuScreen extends Base2DScreen {
-    private Texture background;
-    private Texture playerShip;
-    private Player player;
-    private Sprite shipSprite;
+    private Texture backgroundTexture;
+    private Background background;
 
     public MenuScreen(Game game) {
         super(game);
@@ -29,26 +27,22 @@ public class MenuScreen extends Base2DScreen {
     public void show() {
         super.show();
         batch.getProjectionMatrix().idt(); //getting current Matrix for our batch and make it unit matrix
-        background = new Texture("stars.jpg");
-        playerShip = new Texture( "gamer_ship.png");
-        player = new Player(playerShip, new Vector2(600, 50), 300);
-        shipSprite = new Sprite(new TextureRegion(playerShip));
-        shipSprite.setSize(.15f, .15f);
+        backgroundTexture = new Texture("stars.jpg");
+        background = new Background(new TextureRegion(backgroundTexture));
     }
 
     @Override
     public void render(float delta) {
         super.render(delta);
         batch.begin();
-//        batch.draw(background, 0, 0);
-//        player.render(batch);
-        shipSprite.draw(batch);
+        background.draw(batch);
         batch.end();
     }
 
     @Override
     public void resize(Rect worldBounds) {
         super.resize(worldBounds);
+        background.resize(worldBounds);
     }
 
     @Override
@@ -58,9 +52,8 @@ public class MenuScreen extends Base2DScreen {
 
     @Override
     public void dispose() {
+        backgroundTexture.dispose();
         batch.dispose();
-        background.dispose();
-        playerShip.dispose();
         super.dispose();
     }
 

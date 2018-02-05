@@ -16,7 +16,7 @@ public class Background extends Sprite {
 
     @Override
     public void resize(Rect worldBounds) {
-        setHeightProportions(worldBounds.getHeight()); //background height = worldbounds height
+        setWithProportions(worldBounds.getWidth()); //background height = worldbounds height
         pos.set(worldBounds.pos);           //Set background position to centre
     }
 }
