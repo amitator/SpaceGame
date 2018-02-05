@@ -4,10 +4,12 @@ import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
 
 import ru.geekbrains.spacegame.engine.Base2DScreen;
 import ru.geekbrains.spacegame.engine.Rect;
+import ru.geekbrains.spacegame.engine.Sprite;
 
 /**
  * Created by Igor Prus on 31-Jan-18.
@@ -17,6 +19,7 @@ public class MenuScreen extends Base2DScreen {
     private Texture background;
     private Texture playerShip;
     private Player player;
+    private Sprite shipSprite;
 
     public MenuScreen(Game game) {
         super(game);
@@ -29,6 +32,8 @@ public class MenuScreen extends Base2DScreen {
         background = new Texture("stars.jpg");
         playerShip = new Texture( "gamer_ship.png");
         player = new Player(playerShip, new Vector2(600, 50), 300);
+        shipSprite = new Sprite(new TextureRegion(playerShip));
+        shipSprite.setSize(.15f, .15f);
     }
 
     @Override
@@ -36,7 +41,8 @@ public class MenuScreen extends Base2DScreen {
         super.render(delta);
         batch.begin();
 //        batch.draw(background, 0, 0);
-        player.render(batch);
+//        player.render(batch);
+        shipSprite.draw(batch);
         batch.end();
     }
 
