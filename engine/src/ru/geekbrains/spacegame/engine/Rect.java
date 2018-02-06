@@ -25,6 +25,8 @@ public class Rect {
         this.halfHeight = halfHeight;
     }
 
+
+
     public float getLeft() {
         return pos.x - halfWidth;
     }
@@ -90,6 +92,10 @@ public class Rect {
     public void setSize(float width, float height) {
         this.halfWidth = width / 2f;
         this.halfHeight = height / 2f;
+    }
+
+    public void update(float delta){
+
     }
 
     public boolean isMe(Vector2 touch) {

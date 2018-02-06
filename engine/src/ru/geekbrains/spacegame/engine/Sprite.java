@@ -61,6 +61,11 @@ public class Sprite extends Rect{
 
     }
 
+    @Override
+    public void update(float delta) {
+        super.update(delta);
+    }
+
     public float getAngle() {
         return angle;
     }
