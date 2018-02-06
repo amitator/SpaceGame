@@ -16,7 +16,7 @@ public class StartButton extends Sprite {
 
     @Override
     public void resize(Rect worldBounds) {
-        setWithProportions(.2f); //background width = worldbounds width
+        setHeightProportions(.2f); //background width = worldbounds width
         pos.set(-.7f, -.4f);           //Set background position to centre
     }
 }

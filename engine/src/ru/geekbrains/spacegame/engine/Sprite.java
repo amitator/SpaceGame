@@ -33,7 +33,7 @@ public class Sprite extends Rect{
         );
     }
 
-    public void setWithProportions(float width){
+    public void setWidthProportions(float width){
         setWidth(width);
         float scale = regions[frame].getRegionHeight() / (float) regions[frame].getRegionWidth();
         setHeight(width / scale);

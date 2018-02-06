@@ -12,11 +12,16 @@ import ru.geekbrains.spacegame.engine.Sprite;
 public class ExitButton extends Sprite{
     public ExitButton(TextureRegion region) {
         super(region);
+//        pos.setLeft(.7f, -.4f);           //Set background position to centre
+        this.pos.set(.2f, -.38f);
+//        this.setLeft(.7f);
+//        this.setBottom(-.4f);
     }
 
     @Override
     public void resize(Rect worldBounds) {
-        setWithProportions(.15f); //background width = worldbounds width
-        pos.set(.7f, -.4f);           //Set background position to centre
+        setHeightProportions(.15f); //background width = worldbounds width
+        pos.set(worldBounds.pos.set(.2f, -.38f));
+//        pos.set(worldBounds.setBottom(-.4f));
     }
 }

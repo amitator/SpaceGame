@@ -9,7 +9,9 @@ public class DesktopLauncher {
 	public static void main (String[] arg) {
 		LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();
 		new LwjglApplication(new Space2DGame(), config);
-		config.width = 1280;
+//		float scale = 480f / 854f;
+		float scale = 3f / 4f;
 		config.height = 720;
+		config.width = (int) (config.height * scale);
 	}
 }
