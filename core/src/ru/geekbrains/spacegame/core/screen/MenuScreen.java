@@ -1,4 +1,4 @@
-package ru.geekbrains.spacegame.core;
+package ru.geekbrains.spacegame.core.screen;
 
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
@@ -7,7 +7,9 @@ import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
 
+import ru.geekbrains.spacegame.core.Background;
 import ru.geekbrains.spacegame.core.ui.ButtonExit;
+import ru.geekbrains.spacegame.core.ui.ButtonPlay;
 import ru.geekbrains.spacegame.engine.ActionListener;
 import ru.geekbrains.spacegame.engine.Base2DScreen;
 import ru.geekbrains.spacegame.engine.Rect;
@@ -24,6 +26,7 @@ public class MenuScreen extends Base2DScreen implements ActionListener{
     private static final float BUTTON_PRESS_SCALE = .9f;
 
     private ButtonExit buttonExit;
+    private ButtonPlay buttonPlay;
     private TextureAtlas atlas;
 
     public MenuScreen(Game game) {
@@ -34,6 +37,9 @@ public class MenuScreen extends Base2DScreen implements ActionListener{
     public void actionPerformed(Object src) {
         if (src == buttonExit){
             Gdx.app.exit();
+        }
+        if (src == buttonPlay){
+
         } else {
             throw new RuntimeException("Unknows src " + src);
         }
@@ -48,6 +54,8 @@ public class MenuScreen extends Base2DScreen implements ActionListener{
         atlas = new TextureAtlas("menuAtlas.tpack");
         buttonExit = new ButtonExit(atlas, BUTTON_PRESS_SCALE, this);
         buttonExit.setHeightProportions(BUTTON_HEIGHT);
+        buttonPlay = new ButtonPlay(atlas, BUTTON_PRESS_SCALE, this);
+        buttonPlay.setHeightProportions(BUTTON_HEIGHT);
     }
 
     @Override
@@ -56,6 +64,7 @@ public class MenuScreen extends Base2DScreen implements ActionListener{
         batch.begin();
         background.draw(batch);
         buttonExit.draw(batch);
+        buttonPlay.draw(batch);
         batch.end();
     }
 
@@ -63,18 +72,22 @@ public class MenuScreen extends Base2DScreen implements ActionListener{
     public void resize(Rect worldBounds) {
         super.resize(worldBounds);
         background.resize(worldBounds);
+        buttonExit.resize(worldBounds);
+        buttonPlay.resize(worldBounds);
     }
 
     @Override
     protected void touchDown(Vector2 touch, int pointer) {
         super.touchDown(touch, pointer);
         buttonExit.touchDown(touch, pointer);
+        buttonPlay.touchDown(touch, pointer);
     }
 
     @Override
     protected void touchUp(Vector2 touch, int pointer) {
         super.touchUp(touch, pointer);
         buttonExit.touchUp(touch, pointer);
+        buttonPlay.touchUp(touch, pointer);
     }
 
     @Override
