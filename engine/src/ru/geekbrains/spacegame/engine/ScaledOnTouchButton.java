@@ -20,7 +20,7 @@ public class ScaledOnTouchButton extends Sprite{
     }
 
     @Override
-    protected void touchDown(Vector2 touch, int pointer) {
+    public void touchDown(Vector2 touch, int pointer) {
         if (pressed || !isMe(touch)){
             return;
         }
@@ -30,8 +30,8 @@ public class ScaledOnTouchButton extends Sprite{
     }
 
     @Override
-    protected void touchUp(Vector2 touch, int pointer) {
-        if (this.pointer == pointer || !pressed){
+    public void touchUp(Vector2 touch, int pointer) {
+        if (this.pointer != pointer || !pressed){
             return;
         }
         if (isMe(touch)){

@@ -1,9 +1,9 @@
 package ru.geekbrains.spacegame.core.ui;
 
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
 import ru.geekbrains.spacegame.engine.ActionListener;
+import ru.geekbrains.spacegame.engine.Rect;
 import ru.geekbrains.spacegame.engine.ScaledOnTouchButton;
 
 /**
@@ -15,5 +15,9 @@ public class ButtonExit extends ScaledOnTouchButton{
         super(atlas.findRegion("btExit"), pressScale, actionListener);
     }
 
-
+    @Override
+    public void resize(Rect worldBounds) {
+        setBottom(worldBounds.getBottom());
+        setRight(worldBounds.getRight());
+    }
 }
