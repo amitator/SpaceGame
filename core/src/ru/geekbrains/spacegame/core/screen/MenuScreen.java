@@ -30,8 +30,8 @@ public class MenuScreen extends Base2DScreen implements ActionListener{
 
     private ButtonExit buttonExit;
     private ButtonPlay buttonPlay;
-    private TextureAtlas atlas;
-    private Star star;
+    public TextureAtlas atlas;
+
 
     public MenuScreen(Game game) {
         super(game);
@@ -41,8 +41,7 @@ public class MenuScreen extends Base2DScreen implements ActionListener{
     public void actionPerformed(Object src) {
         if (src == buttonExit){
             Gdx.app.exit();
-        }
-        if (src == buttonPlay){
+        }else if (src == buttonPlay){
             game.setScreen(new GameScreen(game));
         } else {
             throw new RuntimeException("Unknows src " + src);
@@ -52,7 +51,7 @@ public class MenuScreen extends Base2DScreen implements ActionListener{
     @Override
     public void show() {
         super.show();
-        batch.getProjectionMatrix().idt(); //getting current Matrix for our batch and make it unit matrix
+//        batch.getProjectionMatrix().idt(); //getting current Matrix for our batch and make it unit matrix
         backgroundTexture = new Texture("stars.jpg");
         background = new Background(new TextureRegion(backgroundTexture));
         atlas = new TextureAtlas("menuAtlas.tpack");
@@ -60,7 +59,7 @@ public class MenuScreen extends Base2DScreen implements ActionListener{
         buttonExit.setHeightProportions(BUTTON_HEIGHT);
         buttonPlay = new ButtonPlay(atlas, BUTTON_PRESS_SCALE, this);
         buttonPlay.setHeightProportions(BUTTON_HEIGHT);
-        star = new Star(atlas, Rnd.nextFloat(-.005f, .005f), Rnd.nextFloat(0.5f, -.1f), .01f);
+
     }
 
     @Override
@@ -71,21 +70,19 @@ public class MenuScreen extends Base2DScreen implements ActionListener{
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         batch.begin();
         background.draw(batch);
-        star.draw(batch);
         buttonExit.draw(batch);
         buttonPlay.draw(batch);
         batch.end();
     }
 
     public void update(float delta){
-        star.update(delta);
+
     }
 
     @Override
     public void resize(Rect worldBounds) {
         super.resize(worldBounds);
         background.resize(worldBounds);
-        star.resize(worldBounds);
         buttonExit.resize(worldBounds);
         buttonPlay.resize(worldBounds);
     }
