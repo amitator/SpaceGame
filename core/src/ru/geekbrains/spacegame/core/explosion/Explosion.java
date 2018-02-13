@@ -9,11 +9,11 @@ import ru.geekbrains.spacegame.engine.Sprite;
  * Created by Igor Prus on 14-Feb-18.
  */
 
-public class Explotion extends Sprite {
+public class Explosion extends Sprite {
     private float animateInterval = .017f; //time between animation frames
     private float animateTimer;
 
-    public Explotion(TextureRegion region, int rows, int cols, int frames) {
+    public Explosion(TextureRegion region, int rows, int cols, int frames) {
         super(region, rows, cols, frames);
     }
 

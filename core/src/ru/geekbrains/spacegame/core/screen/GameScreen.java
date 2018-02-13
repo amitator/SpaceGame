@@ -10,6 +10,8 @@ import com.badlogic.gdx.math.Vector2;
 
 import ru.geekbrains.spacegame.core.Background;
 import ru.geekbrains.spacegame.core.bullet.BulletPool;
+import ru.geekbrains.spacegame.core.explosion.Explosion;
+import ru.geekbrains.spacegame.core.explosion.ExplosionPool;
 import ru.geekbrains.spacegame.core.star.TrackingStar;
 import ru.geekbrains.spacegame.core.ship.MainShip;
 import ru.geekbrains.spacegame.engine.Base2DScreen;
@@ -30,6 +32,7 @@ public class GameScreen extends Base2DScreen{
     private MainShip mainShip;
 
     private final BulletPool bulletPool = new BulletPool();
+    private ExplosionPool explosionPool;
 
     public GameScreen(Game game) {
         super(game);
@@ -47,6 +50,7 @@ public class GameScreen extends Base2DScreen{
         for (int i = 0; i < star.length; i++) {
             star[i] = new TrackingStar(atlas, Rnd.nextFloat(-.005f, .005f), Rnd.nextFloat(-0.5f, -.1f), .007f, mainShip.getV());
         }
+        explosionPool = new ExplosionPool(atlas);
 
     }
 
@@ -97,6 +101,9 @@ public class GameScreen extends Base2DScreen{
     @Override
     public boolean keyDown(int keycode) {
         mainShip.keyDown(keycode);
+
+        Explosion explosion = explosionPool.obtain();
+
         return false;
     }
 
