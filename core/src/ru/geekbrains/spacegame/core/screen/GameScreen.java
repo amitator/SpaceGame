@@ -24,7 +24,7 @@ public class GameScreen extends Base2DScreen{
     private Texture backgroundTexture;
     public TextureAtlas atlas;
 
-    private Star[] star = new Star[100];
+    private Star[] star = new Star[50];
     private MainShip mainShip;
 
     public GameScreen(Game game) {

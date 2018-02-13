@@ -22,6 +22,10 @@ public class Sprite extends Rect{
         regions[0] = region;
     }
 
+    public Sprite(TextureRegion region, int rows, int cols, int frames){
+        region.split()
+    }
+
     public void draw(SpriteBatch batch){
         batch.draw(
                 regions[frame], //current region
