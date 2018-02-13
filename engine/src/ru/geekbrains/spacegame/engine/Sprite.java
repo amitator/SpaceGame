@@ -4,6 +4,8 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
 
+import ru.geekbrains.spacegame.utils.Regions;
+
 /**
  * Created by Igor Prus on 06-Feb-18.
  */
@@ -23,7 +25,7 @@ public class Sprite extends Rect{
     }
 
     public Sprite(TextureRegion region, int rows, int cols, int frames){
-        region.split()
+        this.regions = Regions.split(region, rows, cols, frames);
     }
 
     public void draw(SpriteBatch batch){
@@ -45,7 +47,7 @@ public class Sprite extends Rect{
 
     public void setHeightProportions(float height){
         setHeight(height);
-        float scale = regions[frame].getRegionHeight() / (float) regions[frame].getRegionWidth();
+        float scale = regions[frame].getRegionWidth() / (float) regions[frame].getRegionHeight();
         setWidth(height * scale);
     }
 

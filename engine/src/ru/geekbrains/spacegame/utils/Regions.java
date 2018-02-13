@@ -1,4 +1,4 @@
-package ru.geekbrains.engine.utils;
+package ru.geekbrains.spacegame.utils;
 
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 

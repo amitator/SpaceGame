@@ -24,7 +24,7 @@ public class GameScreen extends Base2DScreen{
     private Texture backgroundTexture;
     public TextureAtlas atlas;
 
-    private Star[] star = new Star[50];
+    private Star[] star = new Star[20];
     private MainShip mainShip;
 
     public GameScreen(Game game) {
@@ -38,9 +38,9 @@ public class GameScreen extends Base2DScreen{
         background = new Background(new TextureRegion(backgroundTexture));
         atlas = new TextureAtlas("mainAtlas.tpack");
         for (int i = 0; i < star.length; i++) {
-            star[i] = new Star(atlas, Rnd.nextFloat(-.005f, .005f), Rnd.nextFloat(-0.5f, -.1f), .01f);
+            star[i] = new Star(atlas, Rnd.nextFloat(-.005f, .005f), Rnd.nextFloat(-0.5f, -.1f), .007f);
         }
-        mainShip = new MainShip(atlas, 0, 0, .2f);
+        mainShip = new MainShip(atlas);
     }
 
     @Override
@@ -78,6 +78,23 @@ public class GameScreen extends Base2DScreen{
     @Override
     protected void touchUp(Vector2 touch, int pointer) {
         mainShip.touchUp(touch, pointer);
+    }
+
+    @Override
+    public boolean keyDown(int keycode) {
+        mainShip.keyDown(keycode);
+        return false;
+    }
+
+    @Override
+    public boolean keyUp(int keycode) {
+        mainShip.keyUp(keycode);
+        return false;
+    }
+
+    @Override
+    protected void touchDown(Vector2 touch, int pointer) {
+        mainShip.touchDown(touch, pointer);
     }
 
     @Override
