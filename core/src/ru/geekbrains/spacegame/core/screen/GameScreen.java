@@ -10,6 +10,7 @@ import com.badlogic.gdx.math.Vector2;
 
 import ru.geekbrains.spacegame.core.Background;
 import ru.geekbrains.spacegame.core.star.Star;
+import ru.geekbrains.spacegame.core.star.TrackingStar;
 import ru.geekbrains.spacegame.core.ui.MainShip;
 import ru.geekbrains.spacegame.engine.Base2DScreen;
 import ru.geekbrains.spacegame.engine.Rect;
@@ -20,11 +21,12 @@ import ru.geekbrains.spacegame.engine.Rnd;
  */
 
 public class GameScreen extends Base2DScreen{
+    private static final int STAR_COUNT = 30;
     private Background background;
     private Texture backgroundTexture;
     public TextureAtlas atlas;
 
-    private Star[] star = new Star[20];
+    private TrackingStar[] star;
     private MainShip mainShip;
 
     public GameScreen(Game game) {
@@ -37,10 +39,13 @@ public class GameScreen extends Base2DScreen{
         backgroundTexture = new Texture("stars.jpg");
         background = new Background(new TextureRegion(backgroundTexture));
         atlas = new TextureAtlas("mainAtlas.tpack");
-        for (int i = 0; i < star.length; i++) {
-            star[i] = new Star(atlas, Rnd.nextFloat(-.005f, .005f), Rnd.nextFloat(-0.5f, -.1f), .007f);
-        }
         mainShip = new MainShip(atlas);
+        star = new TrackingStar[STAR_COUNT];
+
+        for (int i = 0; i < star.length; i++) {
+            star[i] = new TrackingStar(atlas, Rnd.nextFloat(-.005f, .005f), Rnd.nextFloat(-0.5f, -.1f), .007f, mainShip.getV());
+        }
+
     }
 
     @Override

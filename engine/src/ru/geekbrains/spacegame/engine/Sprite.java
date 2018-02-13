@@ -17,6 +17,8 @@ public class Sprite extends Rect{
     protected int frame;
     protected  boolean isDestroyed;
 
+    public Sprite(){}
+
     public Sprite(TextureRegion region){
         if (region == null){
             throw new RuntimeException("Region is null");
