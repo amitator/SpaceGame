@@ -3,10 +3,6 @@ package ru.geekbrains.spacegame.core.star;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.math.Vector2;
 
-import org.omg.CORBA.PUBLIC_MEMBER;
-
-import ru.geekbrains.spacegame.core.StartButton;
-
 /**
  * Created by Igor Prus on 14-Feb-18.
  */

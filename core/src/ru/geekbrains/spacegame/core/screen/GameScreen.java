@@ -9,9 +9,9 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
 
 import ru.geekbrains.spacegame.core.Background;
-import ru.geekbrains.spacegame.core.star.Star;
+import ru.geekbrains.spacegame.core.bullet.BulletPool;
 import ru.geekbrains.spacegame.core.star.TrackingStar;
-import ru.geekbrains.spacegame.core.ui.MainShip;
+import ru.geekbrains.spacegame.core.ship.MainShip;
 import ru.geekbrains.spacegame.engine.Base2DScreen;
 import ru.geekbrains.spacegame.engine.Rect;
 import ru.geekbrains.spacegame.engine.Rnd;
@@ -29,6 +29,8 @@ public class GameScreen extends Base2DScreen{
     private TrackingStar[] star;
     private MainShip mainShip;
 
+    private final BulletPool bulletPool = new BulletPool();
+
     public GameScreen(Game game) {
         super(game);
     }
@@ -39,7 +41,7 @@ public class GameScreen extends Base2DScreen{
         backgroundTexture = new Texture("stars.jpg");
         background = new Background(new TextureRegion(backgroundTexture));
         atlas = new TextureAtlas("mainAtlas.tpack");
-        mainShip = new MainShip(atlas);
+        mainShip = new MainShip(atlas, bulletPool);
         star = new TrackingStar[STAR_COUNT];
 
         for (int i = 0; i < star.length; i++) {
@@ -51,6 +53,7 @@ public class GameScreen extends Base2DScreen{
     @Override
     public void render(float delta) {
         super.render(delta);
+        deleteAllDestroyed();
         update(delta);
         Gdx.gl.glClearColor(.5f, .2f, .9f, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
@@ -60,7 +63,12 @@ public class GameScreen extends Base2DScreen{
             star[i].draw(batch);
         }
         mainShip.draw(batch);
+        bulletPool.drawActiveObjects(batch);
         batch.end();
+    }
+
+    public void deleteAllDestroyed() {
+        bulletPool.freeAllDestroyedActiveObjects();
     }
 
     @Override
@@ -77,6 +85,7 @@ public class GameScreen extends Base2DScreen{
         for (int i = 0; i < star.length ; i++) {
             star[i].update(delta);
         }
+        bulletPool.updateActiveObjects(delta);
         mainShip.update(delta);
     }
 

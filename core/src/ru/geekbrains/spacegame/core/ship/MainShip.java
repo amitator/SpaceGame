@@ -1,35 +1,41 @@
-package ru.geekbrains.spacegame.core.ui;
+package ru.geekbrains.spacegame.core.ship;
 
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
 
+import ru.geekbrains.spacegame.core.bullet.BulletPool;
 import ru.geekbrains.spacegame.engine.Rect;
 import ru.geekbrains.spacegame.engine.Sprite;
 
 /**
- * Created by usver on 13-Feb-18.
+ * Created by Igor Prus on 13-Feb-18.
  */
 
-public class MainShip extends Sprite {
+public class MainShip extends Ship {
     private static final float SHIP_HEIGHT = 0.12f;
     private static final float BOTTOM_MARGIN = 0.05f;
     private static final int INVALID_POINTER = -1;
 
     private final Vector2 v0 = new Vector2(0.4f, 0.0f);
-    private final Vector2 v = new Vector2();
-    private Rect worldBounds;
+
+//    private Rect worldBounds;
 
     private boolean pressedLeft;
     private boolean pressRight;
 
-    private int leftPointer;
-    private int rightPointer;
+    private int leftPointer = INVALID_POINTER;
+    private int rightPointer = INVALID_POINTER;
 
-
-    public MainShip(TextureAtlas atlas) {
+    public MainShip(TextureAtlas atlas, BulletPool bulletPool) {
         super(atlas.findRegion("main_ship"), 1, 2, 2);
         setHeightProportions(SHIP_HEIGHT);
+        this.bulletPool = bulletPool;
+        this.bulletRegion = atlas.findRegion("bulletMainShip");
+        this.bulletHeight = 0.01f;
+        this.bulletV.set(0, 0.5f);
+        this.bulletDamage = 1;
     }
 
     @Override
@@ -46,7 +52,7 @@ public class MainShip extends Sprite {
     }
 
     public void resize(Rect worldBounds) {
-        this.worldBounds = worldBounds;
+        super.resize(worldBounds);
         setBottom(worldBounds.getBottom() + BOTTOM_MARGIN);
     }
 
@@ -116,6 +122,10 @@ public class MainShip extends Sprite {
                 } else {
                     stop();
                 }
+                break;
+            case Input.Keys.UP:
+                shoot();
+                bulletPool.debugLog();
                 break;
         }
     }
