@@ -98,4 +98,6 @@ public class Sprite extends Rect{
     public void setDestroyed(boolean destroyed) {
         isDestroyed = destroyed;
     }
+
+
 }
