@@ -1,5 +1,6 @@
 package ru.geekbrains.spacegame.core.explosion;
 
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
 
@@ -12,14 +13,17 @@ import ru.geekbrains.spacegame.engine.Sprite;
 public class Explosion extends Sprite {
     private float animateInterval = .017f; //time between animation frames
     private float animateTimer;
+    private Sound sound;
 
-    public Explosion(TextureRegion region, int rows, int cols, int frames) {
+    public Explosion(TextureRegion region, int rows, int cols, int frames, Sound sound) {
         super(region, rows, cols, frames);
+        this.sound = sound;
     }
 
     public void set (float height, Vector2 pos) {
         this.pos.set(pos);
         setHeightProportions(height);
+        sound.play();
     }
 
     @Override

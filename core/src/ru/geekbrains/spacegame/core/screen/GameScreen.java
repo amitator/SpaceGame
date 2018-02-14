@@ -2,6 +2,7 @@ package ru.geekbrains.spacegame.core.screen;
 
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
@@ -34,6 +35,8 @@ public class GameScreen extends Base2DScreen{
     private final BulletPool bulletPool = new BulletPool();
     private ExplosionPool explosionPool;
 
+    private Sound soundExplosion;
+
     public GameScreen(Game game) {
         super(game);
     }
@@ -41,6 +44,7 @@ public class GameScreen extends Base2DScreen{
     @Override
     public void show() {
         super.show();
+        soundExplosion = Gdx.audio.newSound(Gdx.files.internal("sounds/explosion.wav"));
         backgroundTexture = new Texture("stars.jpg");
         background = new Background(new TextureRegion(backgroundTexture));
         atlas = new TextureAtlas("mainAtlas.tpack");
@@ -50,7 +54,7 @@ public class GameScreen extends Base2DScreen{
         for (int i = 0; i < star.length; i++) {
             star[i] = new TrackingStar(atlas, Rnd.nextFloat(-.005f, .005f), Rnd.nextFloat(-0.5f, -.1f), .007f, mainShip.getV());
         }
-        this.explosionPool = new ExplosionPool(atlas);
+        this.explosionPool = new ExplosionPool(atlas, soundExplosion);
 
     }
 
@@ -131,5 +135,6 @@ public class GameScreen extends Base2DScreen{
         atlas.dispose();
         bulletPool.dispose();
         explosionPool.dispose();
+        soundExplosion.dispose();
     }
 }
