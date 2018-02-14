@@ -10,7 +10,7 @@ import ru.geekbrains.spacegame.engine.pool.SpritesPool;
  * Created by Igor Prus on 14-Feb-18.
  */
 
-public class ExplosionPool extends SpritesPool{
+public class ExplosionPool extends SpritesPool<Explosion>{
     private final TextureRegion explosionRegion;
 
     public ExplosionPool(TextureAtlas atlas){
@@ -18,7 +18,7 @@ public class ExplosionPool extends SpritesPool{
     }
 
     @Override
-    protected Sprite newObject() {
+    protected Explosion newObject() {
         return new Explosion(explosionRegion, 9, 9, 74);
     }
 }

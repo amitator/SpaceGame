@@ -50,7 +50,7 @@ public class GameScreen extends Base2DScreen{
         for (int i = 0; i < star.length; i++) {
             star[i] = new TrackingStar(atlas, Rnd.nextFloat(-.005f, .005f), Rnd.nextFloat(-0.5f, -.1f), .007f, mainShip.getV());
         }
-        explosionPool = new ExplosionPool(atlas);
+        this.explosionPool = new ExplosionPool(atlas);
 
     }
 
@@ -59,6 +59,10 @@ public class GameScreen extends Base2DScreen{
         super.render(delta);
         deleteAllDestroyed();
         update(delta);
+        draw();
+    }
+
+    public void draw() {
         Gdx.gl.glClearColor(.5f, .2f, .9f, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         batch.begin();
@@ -68,11 +72,13 @@ public class GameScreen extends Base2DScreen{
         }
         mainShip.draw(batch);
         bulletPool.drawActiveObjects(batch);
+        explosionPool.drawActiveObjects(batch);
         batch.end();
     }
 
     public void deleteAllDestroyed() {
         bulletPool.freeAllDestroyedActiveObjects();
+        explosionPool.freeAllDestroyedActiveObjects();
     }
 
     @Override
@@ -90,6 +96,7 @@ public class GameScreen extends Base2DScreen{
             star[i].update(delta);
         }
         bulletPool.updateActiveObjects(delta);
+        explosionPool.updateActiveObjects(delta);
         mainShip.update(delta);
     }
 
@@ -101,9 +108,6 @@ public class GameScreen extends Base2DScreen{
     @Override
     public boolean keyDown(int keycode) {
         mainShip.keyDown(keycode);
-
-        Explosion explosion = explosionPool.obtain();
-
         return false;
     }
 
@@ -116,6 +120,8 @@ public class GameScreen extends Base2DScreen{
     @Override
     protected void touchDown(Vector2 touch, int pointer) {
         mainShip.touchDown(touch, pointer);
+        Explosion explosion = explosionPool.obtain();
+        explosion.set(.1f, touch);
     }
 
     @Override
@@ -123,5 +129,7 @@ public class GameScreen extends Base2DScreen{
         super.dispose();
         backgroundTexture.dispose();
         atlas.dispose();
+        bulletPool.dispose();
+        explosionPool.dispose();
     }
 }
